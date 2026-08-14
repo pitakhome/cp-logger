@@ -24,13 +24,34 @@
 
         <form id="cpForm" onsubmit="submitForm(event)">
           <div class="mb-3">
-            <label class="form-label">Station ID</label>
-            <input type="text" class="form-control" id="station_id" required readonly placeholder="รอสแกน QR Code...">
+            <label class="form-label">Division</label>
+            <input type="text" class="form-control" id="division" required readonly placeholder="จากการสแกน QR Code">
           </div>
           <div class="mb-3">
-            <label class="form-label">Location / กม.</label>
-            <input type="text" class="form-control" id="location" readonly placeholder="รอสแกน QR Code...">
+            <label class="form-label">Asset Owner</label>
+            <input type="text" class="form-control" id="asset_owner" readonly placeholder="จากการสแกน QR Code">
           </div>
+          <div class="mb-3">
+            <label class="form-label">Route Code</label>
+            <input type="text" class="form-control" id="route_code" readonly placeholder="จากการสแกน QR Code">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Route Name</label>
+            <input type="text" class="form-control" id="route_name" readonly placeholder="จากการสแกน QR Code">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Pipeline Name</label>
+            <input type="text" class="form-control" id="pipeline_name" readonly placeholder="จากการสแกน QR Code">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Nick Name</label>
+            <input type="text" class="form-control" id="nick_name" readonly placeholder="จากการสแกน QR Code">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Bond Box KP</label>
+            <input type="text" class="form-control" id="bondbox_kp" readonly placeholder="จากการสแกน QR Code">
+          </div>
+
           <div class="mb-3">
             <label class="form-label">Type</label>
             <select class="form-select" id="type">
@@ -107,9 +128,17 @@
     let html5QrcodeScanner;
 
     function onScanSuccess(decodedText, decodedResult) {
+      // รูปแบบข้อมูลใน QR Code จะต้องเรียงตามลำดับคั่นด้วยเครื่องหมาย |
+      // ตัวอย่าง: Division|AssetOwner|RouteCode|RouteName|PipelineName|NickName|BondBoxKP
       let arr = decodedText.split('|');
-      document.getElementById('station_id').value = arr[0] || decodedText;
-      document.getElementById('location').value = arr[1] || '';
+      
+      document.getElementById('division').value = arr[0] || '';
+      document.getElementById('asset_owner').value = arr[1] || '';
+      document.getElementById('route_code').value = arr[2] || '';
+      document.getElementById('route_name').value = arr[3] || '';
+      document.getElementById('pipeline_name').value = arr[4] || '';
+      document.getElementById('nick_name').value = arr[5] || '';
+      document.getElementById('bondbox_kp').value = arr[6] || '';
       
       html5QrcodeScanner.clear().then(_ => {
         document.getElementById('btn-rescan').style.display = 'block';
@@ -135,8 +164,13 @@
       let selectedDir = document.querySelector('input[name="direction"]:checked');
 
       let data = {
-        station_id: document.getElementById('station_id').value,
-        location: document.getElementById('location').value,
+        division: document.getElementById('division').value,
+        asset_owner: document.getElementById('asset_owner').value,
+        route_code: document.getElementById('route_code').value,
+        route_name: document.getElementById('route_name').value,
+        pipeline_name: document.getElementById('pipeline_name').value,
+        nick_name: document.getElementById('nick_name').value,
+        bondbox_kp: document.getElementById('bondbox_kp').value,
         type: document.getElementById('type').value,
         von_ptt: document.getElementById('von_ptt').value,
         voff_ptt: document.getElementById('voff_ptt').value,
@@ -149,7 +183,7 @@
         remark: document.getElementById('remark').value
       };
 
-      if(!data.station_id) {
+      if(!data.division) {
         alert('กรุณาสแกน QR Code ก่อนบันทึกข้อมูล');
         return;
       }
@@ -157,7 +191,6 @@
       document.getElementById('submitBtn').disabled = true;
       document.getElementById('submitBtn').innerText = 'กำลังบันทึก...';
 
-      // ** แทนที่ URL ด้านล่างนี้ด้วย URL ของ Apps Script Web App อันเดิมของคุณ **
       const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbziglsr6a2yo733gVfsZM4X-0HbSVqpkzZO3xmah8401jDPqARbtnNNo4ritzOznwlKRQ/exec";
 
       fetch(WEB_APP_URL, {
