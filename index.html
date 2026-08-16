@@ -75,7 +75,7 @@
 
           <div class="mb-3">
             <label class="form-label">Foreign Pipe (ระบุชื่อ)</label>
-            <input type="text" class="form-control" id="foreign_Pipe" placeholder="ระบุชื่อ Foreign">
+            <input type="text" class="form-control" id="foreign_pipe" placeholder="ระบุชื่อ Foreign">
           </div>
 
           <div class="row">
@@ -180,7 +180,7 @@
         type: document.getElementById('type').value,
         von_ptt: document.getElementById('von_ptt').value,
         voff_ptt: document.getElementById('voff_ptt').value,
-        foreign: document.getElementById('foreign_Pipe').value, // เพิ่มบรรทัดนี้
+        foreign: document.getElementById('foreign_pipe').value, // เพิ่มบรรทัดนี้
         von_foreign: document.getElementById('von_foreign').value,
         voff_foreign: document.getElementById('voff_foreign').value,
         current_adc: document.getElementById('current_adc').value,
@@ -198,7 +198,7 @@
       document.getElementById('submitBtn').disabled = true;
       document.getElementById('submitBtn').innerText = 'กำลังบันทึก...';
 
-      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzNddrsTuy0bAd8aKYazzQTosYQwje0odM37r5fRKpn17Rxw770YqwKA1cEfsix4WlY/exec";
+      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrL48XvhbqFdP28eZbObgn5qRk9eUVE3XcmtjZxfpquOI0pHcdo2BnR9EOCtLdOVlLMQ/exec";
 
       fetch(WEB_APP_URL, {
         method: 'POST',
