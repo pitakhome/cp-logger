@@ -180,7 +180,7 @@
         type: document.getElementById('type').value,
         von_ptt: document.getElementById('von_ptt').value,
         voff_ptt: document.getElementById('voff_ptt').value,
-        foreign: document.getElementById('foreign_pipe').value, // เพิ่มบรรทัดนี้
+        foreign_pipe: document.getElementById('foreign_pipe').value, // เพิ่มบรรทัดนี้
         von_foreign: document.getElementById('von_foreign').value,
         voff_foreign: document.getElementById('voff_foreign').value,
         current_adc: document.getElementById('current_adc').value,
@@ -198,7 +198,7 @@
       document.getElementById('submitBtn').disabled = true;
       document.getElementById('submitBtn').innerText = 'กำลังบันทึก...';
 
-      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrL48XvhbqFdP28eZbObgn5qRk9eUVE3XcmtjZxfpquOI0pHcdo2BnR9EOCtLdOVlLMQ/exec";
+      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwfbooJVA730ZphaMqvNEgobg38wbqntZxlz_JHydSTWBturdUKJ_G0Q7KFdm0-baBuSQ/exec";
 
       fetch(WEB_APP_URL, {
         method: 'POST',
